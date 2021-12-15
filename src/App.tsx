@@ -1,12 +1,11 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Routers from "./routers.routes";
 import GlobalStyle from "./styles/global";
-
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Home />
+      <Routers />
     </>
   );
 }
