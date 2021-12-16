@@ -31,6 +31,30 @@ export const Input = styled.input`
   margin: 10px 0px;
 `;
 
+export const Select = styled.select`
+  width: auto;
+  padding: 0px 15px;
+  height: 45px;
+
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  
+  margin: 10px 0px;
+`;
+
+export const TextArea = styled.textarea`
+    width: auto;
+    padding: 0px 15px;
+    height: 45px;
+
+    outline: none;
+    border: none;
+    border-radius: 4px;
+
+    margin: 10px 0px;
+`;
+
 export const SubmitButton = styled.button`
   height: 45px;
   background-color: ${colors.details};
@@ -73,3 +97,5 @@ export const BackButton = styled.button`
   color: ${colors.details};
   border-radius: 4px;
 `;
+
+export const Option = styled.option``;

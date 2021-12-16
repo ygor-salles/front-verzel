@@ -4,17 +4,19 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../../components/Header";
 import { routes } from "../../../../constants/routers";
-import { getAllModules } from "../../../../services/modules";
+import { Lesson } from "../../../../models/Lesson";
+import { getAllLessons } from "../../../../services/lessons";
 import { Container, Flex, OptionButton, Table, Td, Th, Tr } from "./styles";
 
-const ModulesList: React.FC = () => {
+const LessonsList: React.FC = () => {
   const navigation = useNavigate();
-  const [modules, setModules] = useState([]);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
 
-  const handleGetAllModules = async () => {
+  const handleGetAllLessons = async () => {
     try {
-      const { data } = await getAllModules();
-      setModules(data);
+      const data = await getAllLessons();
+      console.log('Data', data)
+      setLessons(data);
     } catch (error) {
       console.log("error", error);
     }
@@ -25,7 +27,7 @@ const ModulesList: React.FC = () => {
   };
 
   useEffect(() => {
-    handleGetAllModules();
+    handleGetAllLessons();
   }, []);
 
   return (
@@ -38,13 +40,17 @@ const ModulesList: React.FC = () => {
         <Tr>
           <Th>ID</Th>
           <Th>Nome</Th>
+          <Th>Data da aula</Th>
+          <Th>Link</Th>
           <Th>Opções</Th>
         </Tr>
 
-        {modules?.map(({ id, name }) => (
+        {lessons?.map(({ id, name, date_lesson, link }) => (
           <Tr>
             <Td>{id}</Td>
             <Td>{name}</Td>
+            <Td>{date_lesson}</Td>
+            <Td>{link}</Td>
             <Td>
               <OptionButton>
                 <BiEdit size={20} color="#fff" />
@@ -60,4 +66,4 @@ const ModulesList: React.FC = () => {
   );
 };
 
-export default ModulesList;
+export default LessonsList;

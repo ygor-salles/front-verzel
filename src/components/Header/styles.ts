@@ -14,7 +14,23 @@ export const SignInButton = styled.button`
   background-color: ${colors.background};
   border: 1px solid ${colors.button};
   color: ${colors.button};
-  padding: 10px 20px;
+  margin: 0px 5px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  height: 45px;
+  transition: 0.3s ease;
+  &:hover {
+    background-color: ${colors.button};
+    color: ${colors.color};
+  }
+`;
+
+export const ActionButton = styled.button`
+  background-color: ${colors.background};
+  border: none;
+  color: ${colors.button};
+  margin: 0px 5px;
+  padding: 10px 15px;
   border-radius: 12px;
   height: 45px;
   transition: 0.3s ease;

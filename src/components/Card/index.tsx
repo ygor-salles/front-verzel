@@ -1,14 +1,17 @@
-import React from "react";
 import { Container, Content, Icon, Title } from "./styles";
 
-const Card: React.FC = () => {
+type Props = {
+  name: string;
+  lessons: Array<[]>;
+};
+const Card = ({ name, lessons }: Props) => {
   return (
     <Container>
       <Icon src="https://www.devaria.com.br/static/media/icon_classActive.392bb0db.svg" />
       <Content>
-        <Title size={20}>Conceito de Sitemas</Title>
+        <Title size={20}>{name}</Title>
         <Title size={18} color="#fff">
-          9/9 aulas
+          {lessons.length} aulas
         </Title>
       </Content>
     </Container>

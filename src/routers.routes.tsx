@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Lessons from "./pages/Lessons";
+import LessonsList from "./pages/Lessons/components/LessonList";
 import Login from "./pages/Login";
 import Modules from "./pages/Modules";
 import ModulesList from "./pages/Modules/components/ModuleList";
@@ -12,9 +14,10 @@ function Routers() {
       <Route path="/" element={<Home />}></Route>
       <Route path="login" element={<Login />}></Route>
       <Route path="register" element={<Register />}></Route>
-      <Route path="module/create" element={<Modules />}></Route>
-      <Route path="module/list" element={<ModulesList />}></Route>
-      <Route path="module/update/:id" element={<ModulesList />}></Route>
+      <Route path="module/info" element={<Modules />}></Route>
+      <Route path="modules" element={<ModulesList />}></Route>
+      <Route path="lesson/info" element={<Lessons />}></Route>
+      <Route path="lessons" element={<LessonsList />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );

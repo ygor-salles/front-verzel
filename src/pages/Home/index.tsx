@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import Header from "../../components/Header";
+import { getAllModules } from "../../services/modules";
 import { Container, SubTitle, Title, Wrapper } from "./styles";
 
 const Home: React.FC = () => {
-  const array = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+  const [modules, setModules] = useState([]);
+
+  const handleGetAllModules = async () => {
+    try {
+      const { data } = await getAllModules();
+      setModules(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetAllModules();
+  }, []);
   return (
     <div>
       <Header />
@@ -12,8 +26,8 @@ const Home: React.FC = () => {
         <Title>Módulos</Title>
         <SubTitle>Selecione o módulo para ver as aulas disponíveis:</SubTitle>
         <Wrapper>
-          {array?.map((card) => (
-            <Card />
+          {modules?.map(({ name, lessons }) => (
+            <Card name={name} lessons={lessons} />
           ))}
         </Wrapper>
       </Container>
