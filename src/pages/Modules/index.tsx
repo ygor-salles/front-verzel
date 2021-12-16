@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
-import { createModule } from "../../services/modules";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { createModule, editByIdModule, getByIdModule } from "../../services/modules";
 import {
   BackButton,
   Card,
@@ -9,9 +9,14 @@ import {
   SubmitButton,
   Title,
 } from "./styles";
+import { routes } from "../../constants/routers";
 
 const Modules: React.FC = () => {
   const [name, setName] = useState<string>("");
+
+  const { id } = useParams();
+
+  const navigation = useNavigate();
 
   const handleChangeName = useCallback(
     ({ target }) => {
@@ -23,11 +28,36 @@ const Modules: React.FC = () => {
   const handleCreate = async () => {
     try {
       const res = await createModule({ name });
-      console.log(res);
+      alert(res.data.message ?? 'Módulo criado');
+      navigation(routes.modules)
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
+
+  const handleUpdate = async () => {
+    try {
+      const res = await editByIdModule({ id, name });
+      alert(res.data.message ?? 'Atualização relizada')
+      navigation(routes.modules)
+    } catch (error) { 
+      alert(error)
+    }
+  }
+
+  const getModuleById = async (id: number) => {
+    try {
+      const { data: { name } } = await getByIdModule(id);
+      setName(name) 
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+  useEffect(() => {
+    if (id && id !== 'create')
+      getModuleById(+id)
+  }, [id])
 
   return (
     <Container>
@@ -40,14 +70,16 @@ const Modules: React.FC = () => {
           alt=""
           width="90%"
         />
-        <Title>Criação de modulo</Title>
+        <Title>{ id === 'create' ? 'Criação de módulo' : 'Edição de módulo' }</Title>
         <Input
           placeholder="Digite o nome do modulo"
           onChange={handleChangeName}
           value={name}
         />
 
-        <SubmitButton onClick={handleCreate}>Criar</SubmitButton>
+        <SubmitButton onClick={id === 'create' ? handleCreate : handleUpdate}>
+          {id === 'create' ? 'Criar' : 'Editar'}
+        </SubmitButton>
       </Card>
     </Container>
   );

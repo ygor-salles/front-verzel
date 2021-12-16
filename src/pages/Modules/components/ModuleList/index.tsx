@@ -4,7 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../../components/Header";
 import { routes } from "../../../../constants/routers";
-import { getAllModules } from "../../../../services/modules";
+import { deleteByIdModule, getAllModules } from "../../../../services/modules";
 import { Container, Flex, OptionButton, Table, Td, Th, Tr } from "./styles";
 
 const ModulesList: React.FC = () => {
@@ -21,8 +21,26 @@ const ModulesList: React.FC = () => {
   };
 
   const handleRedirectCreate = () => {
-    navigation(routes.moduleInfo);
+    navigation(`${routes.moduleInfo}/create`);
   };
+
+  const handleRedirectUpdate = (id: number) => {
+    navigation(`${routes.moduleInfo}/${id}`);
+  }
+  
+  const handleRedirectDelete = async (id: number) => {
+    const text = 'Deseja realmente deletar?';
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm(text) === true) {
+      try {
+        const res = await deleteByIdModule(id);
+        alert(res.data.message ?? 'Deleção realizada');
+        handleGetAllModules();
+      } catch (error) {
+        alert(error)
+      }
+    }
+  }
 
   useEffect(() => {
     handleGetAllModules();
@@ -46,10 +64,10 @@ const ModulesList: React.FC = () => {
             <Td>{id}</Td>
             <Td>{name}</Td>
             <Td>
-              <OptionButton>
+              <OptionButton onClick={() => handleRedirectUpdate(id)}>
                 <BiEdit size={20} color="#fff" />
               </OptionButton>
-              <OptionButton>
+              <OptionButton onClick={() => handleRedirectDelete(id)}>
                 <MdDeleteOutline size={22} color="#fff" />
               </OptionButton>
             </Td>
