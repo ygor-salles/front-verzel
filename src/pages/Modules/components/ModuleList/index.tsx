@@ -16,7 +16,7 @@ const ModulesList: React.FC = () => {
       const { data } = await getAllModules();
       setModules(data);
     } catch (error) {
-      console.log("error", error);
+      alert(error);
     }
   };
 

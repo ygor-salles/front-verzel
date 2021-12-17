@@ -61,7 +61,7 @@ const Modules: React.FC = () => {
 
   return (
     <Container>
-      <Link to="/">
+      <Link to="/modules">
         <BackButton>Voltar</BackButton>
       </Link>
       <Card>

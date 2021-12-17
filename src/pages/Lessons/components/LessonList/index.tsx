@@ -4,27 +4,43 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../../components/Header";
 import { routes } from "../../../../constants/routers";
-import { Lesson } from "../../../../models/Lesson";
-import { getAllLessons } from "../../../../services/lessons";
+import { deleteByIdLesson, getAllLessons } from "../../../../services/lessons";
 import { Container, Flex, OptionButton, Table, Td, Th, Tr } from "./styles";
 
 const LessonsList: React.FC = () => {
   const navigation = useNavigate();
-  const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [lessons, setLessons] = useState([]);
 
   const handleGetAllLessons = async () => {
     try {
       const data = await getAllLessons();
-      console.log('Data', data)
       setLessons(data);
     } catch (error) {
-      console.log("error", error);
+      alert(error)
     }
   };
 
   const handleRedirectCreate = () => {
-    navigation(routes.moduleInfo);
+    navigation(`${routes.lessonInfo}/create`);
   };
+
+  const handleRedirectUpdate = (id: number) => {
+    navigation(`${routes.lessonInfo}/${id}`);
+  }
+  
+  const handleRedirectDelete = async (id: number) => {
+    const text = 'Deseja realmente deletar?';
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm(text) === true) {
+      try {
+        const res = await deleteByIdLesson(id);
+        alert(res.data.message ?? 'Deleção realizada');
+        handleGetAllLessons();
+      } catch (error) {
+        alert(error)
+      }
+    }
+  }
 
   useEffect(() => {
     handleGetAllLessons();
@@ -52,10 +68,10 @@ const LessonsList: React.FC = () => {
             <Td>{date_lesson}</Td>
             <Td>{link}</Td>
             <Td>
-              <OptionButton>
+              <OptionButton onClick={() => handleRedirectUpdate(id)}>
                 <BiEdit size={20} color="#fff" />
               </OptionButton>
-              <OptionButton>
+              <OptionButton onClick={() => handleRedirectDelete(id)}>
                 <MdDeleteOutline size={22} color="#fff" />
               </OptionButton>
             </Td>

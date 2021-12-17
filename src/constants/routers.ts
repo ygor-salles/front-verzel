@@ -4,4 +4,6 @@ export const routes = {
   home: "/",
   modules: "/modules",
   moduleInfo: "/module/info",
+  lessons: "/lessons",
+  lessonInfo: "/lesson/info"
 };

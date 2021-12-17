@@ -16,7 +16,7 @@ function Routers() {
       <Route path="register" element={<Register />}></Route>
       <Route path="module/info/:id" element={<Modules />}></Route>
       <Route path="modules" element={<ModulesList />}></Route>
-      <Route path="lesson/info" element={<Lessons />}></Route>
+      <Route path="lesson/info/:id" element={<Lessons />}></Route>
       <Route path="lessons" element={<LessonsList />}></Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
