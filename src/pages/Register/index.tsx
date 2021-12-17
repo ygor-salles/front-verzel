@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { routes } from "../../constants/routers";
 import { createUser } from "../../services/auth";
 import { ActionButton } from "../Login/styles";
 import { Card, Container, Input, SubmitButton, Title } from "./styles";
@@ -8,6 +9,8 @@ const Register: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const navigation = useNavigate();
 
   const handleChangeName = useCallback(
     ({ target }) => {
@@ -31,16 +34,12 @@ const Register: React.FC = () => {
   );
 
   const handleLogin = async () => {
-    console.log(name, email, password);
-    const { data, error } = await createUser({ name, email, password });
-    console.log(error);
-    if (error) {
-      alert("Usuario ja existe.");
-    }
-
     try {
+      const { data, error, status } = await createUser({ name, email, password });
+      alert(data.message ?? 'Usuário criado')
+      if(status===201) navigation('/login')
     } catch (error) {
-      alert("Erro na request de criação de usuário.");
+      alert(error);
     }
   };
 
@@ -73,7 +72,7 @@ const Register: React.FC = () => {
           value={password}
           onChange={handleChangePassword}
         />
-        <SubmitButton onClick={handleLogin}>Entrar</SubmitButton>
+        <SubmitButton onClick={handleLogin}>Cadastrar</SubmitButton>
         <Link to="/">
           <ActionButton>Ir para o ínicio</ActionButton>
         </Link>
