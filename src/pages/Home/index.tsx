@@ -6,6 +6,7 @@ import { Container, SubTitle, Title, Wrapper } from "./styles";
 
 const Home: React.FC = () => {
   const [modules, setModules] = useState([]);
+  const [active, setActive] = useState(0)
 
   const handleGetAllModules = async () => {
     try {
@@ -15,6 +16,10 @@ const Home: React.FC = () => {
       console.log("error", error);
     }
   };
+
+  const handleToggle = (id: any) => {
+    setActive(id)
+  }
 
   useEffect(() => {
     handleGetAllModules();
@@ -26,8 +31,8 @@ const Home: React.FC = () => {
         <Title>Módulos</Title>
         <SubTitle>Selecione o módulo para ver as aulas disponíveis:</SubTitle>
         <Wrapper>
-          {modules?.map(({ name, lessons }) => (
-            <Card name={name} lessons={lessons} />
+          {modules?.map(({ id, name, lessons }) => (
+            <Card name={name} lessons={lessons} id={id} active={active} toggle={handleToggle} />
           ))}
         </Wrapper>
       </Container>

@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 
-export const Container = styled.div`
+type ContainerProps = {
+  active: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
   border: 1px solid ${colors.details};
   width: 100%;
   max-width: 380px;
-  height: 120px;
+  height: ${(props) => (props.active ? "100%" : "120px")};
+  min-height: 120px;
   padding: 0px 10px;
   border-radius: 16px;
   margin: 10px;
@@ -29,3 +34,4 @@ export const Icon = styled.img`
   width: 50px;
   margin-right: 20px;
 `;
+
