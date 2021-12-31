@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { api, baseUrl } from "../api";
+import { api, baseURL } from "../api";
 
 type Props = {
   id?: string;
@@ -11,7 +11,7 @@ export const createModule = async ({ name }: Props) => {
 
   const config: AxiosRequestConfig = {
     method: 'POST',
-    url: `${baseUrl}modules`,
+    url: `${baseURL}modules`,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const editByIdModule = async ({ id, name }: Props) => {
 
   const config: AxiosRequestConfig = {
     method: 'PUT',
-    url: `${baseUrl}modules/${id}`,
+    url: `${baseURL}modules/${id}`,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const deleteByIdModule = async (id: number) => {
 
   const config: AxiosRequestConfig = {
     method: 'DELETE',
-    url: `${baseUrl}modules/${id}`,
+    url: `${baseURL}modules/${id}`,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',

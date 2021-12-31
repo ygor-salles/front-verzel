@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { baseUrl } from "../api";
+import { baseURL } from "../api";
 
 type Props = {
   id?: number;
@@ -15,7 +15,7 @@ export const createLesson = async ({ name, date_lesson, module_id, link, descrip
 
   const config: AxiosRequestConfig = {
     method: 'POST',
-    url: `${baseUrl}lessons`,
+    url: `${baseURL}lessons`,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export const getAllLessons = async () => {
 
     const config: AxiosRequestConfig = {
         method: 'GET',
-        url: `${baseUrl}lessons`,
+        url: `${baseURL}lessons`,
         headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export const getByIdLesson = async (id: number) => {
 
   const config: AxiosRequestConfig = {
     method: 'GET',
-    url: `${baseUrl}lessons/${id}`,
+    url: `${baseURL}lessons/${id}`,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export const editByIdLesson = async ({ id, name, date_lesson, module_id, link, d
 
   const config: AxiosRequestConfig = {
     method: 'PUT',
-    url: `${baseUrl}lessons/${id}`,
+    url: `${baseURL}lessons/${id}`,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export const deleteByIdLesson = async (id: number) => {
 
   const config: AxiosRequestConfig = {
     method: 'DELETE',
-    url: `${baseUrl}lessons/${id}`,
+    url: `${baseURL}lessons/${id}`,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
