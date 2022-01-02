@@ -7,7 +7,6 @@ type Props = {
 };
 export const createUser = async ({ name, email, password }: Props) => {
   const res = await api.post("/users", { name, email, password });
-  console.log(res)
   const { data, status } = res;
 
   return { data, status, error: data?.email ? false : true };

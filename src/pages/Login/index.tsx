@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../constants/routers";
@@ -21,14 +20,14 @@ const Login: React.FC = () => {
     ({ target }) => {
       setEmail(target.value);
     },
-    [email]
+    []
   );
 
   const handleChangePassword = useCallback(
     ({ target }) => {
       setPassword(target.value);
     },
-    [password]
+    []
   );
 
   const handleLogin = async () => {

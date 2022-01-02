@@ -10,8 +10,6 @@ type Props = {
 };
 const Card = ({ id, name, lessons, active, toggle }: Props) => {
 
-  console.log(active, id)
-
   return (
     <Container active={active === id} onClick={() => toggle(id)}>
       <Icon src="https://www.devaria.com.br/static/media/icon_classActive.392bb0db.svg" />

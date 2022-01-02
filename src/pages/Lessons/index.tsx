@@ -60,12 +60,6 @@ const Modules: React.FC = () => {
   );
 
   const handleCreate = async () => {
-    console.log(name)
-    console.log()
-    console.log(module_id)
-    console.log(link)
-    console.log(description)
-
     const ano = +(date_lesson.split('-')[0])
     const mes = +(date_lesson.split('-')[1])
     const dia =  +(date_lesson.split('-')[2])
@@ -86,11 +80,6 @@ const Modules: React.FC = () => {
   };
 
   const handleUpdate = async () => {
-    console.log(name)
-    console.log(date_lesson)
-    console.log(module_id)
-    console.log(link)
-    console.log(description)
 
     if (id && id !== 'create') {
       const ano = +(date_lesson.split('-')[0])
@@ -130,7 +119,6 @@ const Modules: React.FC = () => {
   const handleGetAllModules = async () => {
     try {
       const { data } = await getAllModules();
-      console.log(data)
       setAllModules(data);
     } catch (error) {
       console.log("error", error);
