@@ -16,7 +16,8 @@ function App() {
 
   useEffect(() => {
     handleValidAuth();
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
