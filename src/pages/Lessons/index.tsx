@@ -1,20 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { routes } from "../../constants/routers";
 import { Module } from "../../models/Module";
 import { createLesson, editByIdLesson, getByIdLesson } from "../../services/lessons";
-import { createModule, getAllModules, getByIdModule } from "../../services/modules";
+import { getAllModules } from "../../services/modules";
 import {
   BackButton,
   Card,
   Container,
-  Input,
-  Select,
-  SubmitButton,
-  Title,
-  Option,
-  TextArea
+  Input, Option, Select,
+  SubmitButton, TextArea, Title
 } from "./styles";
-import { routes } from "../../constants/routers";
 
 const Modules: React.FC = () => {
   const [name, setName] = useState<string>("");

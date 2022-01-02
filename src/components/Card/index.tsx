@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Lesson } from "../../models/Lesson";
 import { Container, Content, Icon, Title } from "./styles";
 

@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { routes } from "../../constants/routers";
 import { createUser } from "../../services/auth";
 import { ActionButton } from "../Login/styles";
 import { Card, Container, Input, SubmitButton, Title } from "./styles";
@@ -35,7 +34,7 @@ const Register: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const { data, error, status } = await createUser({ name, email, password });
+      const { data, status } = await createUser({ name, email, password });
       alert(data.message ?? 'Usuário criado')
       if(status===201) navigation('/login')
     } catch (error) {
